@@ -12,7 +12,7 @@ Model name is converted to lowercase for the collection name:
 """
 
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 
 # Example schemas (replace with your own):
 
@@ -38,11 +38,39 @@ class Product(BaseModel):
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
 
-# Add your own schemas here:
-# --------------------------------------------------
+# Formal shoes specific product schema
+class Shoe(BaseModel):
+    """
+    Formal shoes collection schema
+    Collection name: "shoe"
+    """
+    title: str
+    description: Optional[str] = None
+    brand: Optional[str] = None
+    price: float = Field(..., ge=0)
+    category: str = Field("formal-shoes", description="Fixed category for this app")
+    images: List[str] = Field(default_factory=list, description="Image URLs")
+    rating: float = Field(4.5, ge=0, le=5)
+    in_stock: bool = True
+    colors: List[str] = Field(default_factory=lambda: ["Black", "Brown", "Tan"]) 
+    sizes: List[int] = Field(default_factory=lambda: [6,7,8,9,10,11,12])
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class OrderItem(BaseModel):
+    product_id: str
+    title: str
+    price: float
+    quantity: int = Field(1, ge=1)
+    size: Optional[int] = None
+    color: Optional[str] = None
+    image: Optional[str] = None
+
+class Order(BaseModel):
+    """Orders collection schema. Collection name: "order"""
+    items: List[OrderItem]
+    subtotal: float = Field(..., ge=0)
+    shipping: float = Field(0, ge=0)
+    total: float = Field(..., ge=0)
+    customer_name: Optional[str] = None
+    customer_email: Optional[str] = None
+    address: Optional[str] = None
+    status: str = Field("created", description="created, paid, shipped, delivered")
