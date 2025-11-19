@@ -1,9 +1,14 @@
 import os
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional
+
 from bson import ObjectId
+from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from pydantic import BaseModel, EmailStr
+from passlib.context import CryptContext
+from jose import jwt, JWTError
 
 from database import db, create_document, get_documents
 from schemas import Shoe, Order
@@ -17,6 +22,51 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# === Security & Auth Setup ===
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-please-change")
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+http_bearer = HTTPBearer(auto_error=False)
+
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
+
+
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
+    to_encode = data.copy()
+    expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class RegisterRequest(BaseModel):
+    name: str
+    email: EmailStr
+    password: str
+
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class UserPublic(BaseModel):
+    id: str
+    name: str
+    email: EmailStr
 
 
 # Helpers
@@ -68,7 +118,56 @@ def test_database():
     return response
 
 
-# Seed some default shoes if collection empty
+# === Auth Endpoints ===
+@app.post("/auth/register", response_model=UserPublic)
+def register_user(payload: RegisterRequest):
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database not configured")
+
+    existing = db["user"].find_one({"email": payload.email.lower()})
+    if existing:
+        raise HTTPException(status_code=400, detail="Email already registered")
+
+    user_doc = {
+        "name": payload.name,
+        "email": payload.email.lower(),
+        "password_hash": hash_password(payload.password),
+    }
+    user_id = create_document("user", user_doc)
+    return UserPublic(id=user_id, name=payload.name, email=payload.email)
+
+
+@app.post("/auth/login", response_model=Token)
+def login_user(payload: LoginRequest):
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database not configured")
+
+    user = db["user"].find_one({"email": payload.email.lower()})
+    if not user or not verify_password(payload.password, user.get("password_hash", "")):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    token = create_access_token({"sub": str(user.get("_id")), "email": user.get("email")})
+    return Token(access_token=token)
+
+
+def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(http_bearer)) -> dict:
+    if credentials is None or credentials.scheme.lower() != "bearer":
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    token = credentials.credentials
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id = payload.get("sub")
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token payload")
+        user = db["user"].find_one({"_id": ObjectId(user_id)})
+        if not user:
+            raise HTTPException(status_code=401, detail="User not found")
+        return user
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+
+# === Seed some default shoes if collection empty ===
 @app.post("/seed")
 def seed_shoes():
     count = db["shoe"].count_documents({}) if db else 0
@@ -83,6 +182,7 @@ def seed_shoes():
             price=149.99,
             images=[
                 "https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1600&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1600&auto=format&fit=crop",
             ],
             rating=4.7,
             colors=["Black", "Brown"],
@@ -94,6 +194,7 @@ def seed_shoes():
             price=129.00,
             images=[
                 "https://images.unsplash.com/photo-1528701800489-20be3c2ea4e1?q=80&w=1600&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
             ],
             rating=4.6,
             colors=["Tan", "Black"],
@@ -105,9 +206,32 @@ def seed_shoes():
             price=179.50,
             images=[
                 "https://images.unsplash.com/photo-1605733512920-0f3c45a3d3b8?q=80&w=1600&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1535046128895-5d09e52971d8?q=80&w=1600&auto=format&fit=crop",
             ],
             rating=4.8,
             colors=["Brown"],
+        ).model_dump(),
+        Shoe(
+            title="Wholecut Prestige",
+            description="Single‑piece leather wholecut for a seamless silhouette",
+            brand="Aristocrat",
+            price=199.00,
+            images=[
+                "https://images.unsplash.com/photo-1521579873432-524e5b81f7ae?q=80&w=1600&auto=format&fit=crop",
+            ],
+            rating=4.9,
+            colors=["Black"],
+        ).model_dump(),
+        Shoe(
+            title="Wingtip Heritage",
+            description="Classic brogue wingtip with hand‑stitched detailing",
+            brand="Heritage",
+            price=159.00,
+            images=[
+                "https://images.unsplash.com/photo-1614252369475-531eba34b280?q=80&w=1600&auto=format&fit=crop",
+            ],
+            rating=4.5,
+            colors=["Brown", "Tan"],
         ).model_dump(),
     ]
 
@@ -116,7 +240,7 @@ def seed_shoes():
     return {"seeded": True, "count": len(sample)}
 
 
-# Endpoints
+# === Product Endpoints ===
 @app.get("/shoes")
 def list_shoes():
     docs = get_documents("shoe")
@@ -134,6 +258,7 @@ def get_shoe(shoe_id: str):
         raise HTTPException(status_code=400, detail="Invalid ID")
 
 
+# === Orders (Protected) ===
 class CartItem(BaseModel):
     product_id: str
     quantity: int = 1
@@ -149,7 +274,7 @@ class CreateOrderRequest(BaseModel):
 
 
 @app.post("/orders")
-def create_order(payload: CreateOrderRequest):
+def create_order(payload: CreateOrderRequest, user: dict = Depends(get_current_user)):
     # Build order totals from items
     subtotal = 0.0
     order_items = []
@@ -181,10 +306,11 @@ def create_order(payload: CreateOrderRequest):
         "subtotal": round(subtotal, 2),
         "shipping": shipping,
         "total": total,
-        "customer_name": payload.customer_name,
-        "customer_email": payload.customer_email,
+        "customer_name": payload.customer_name or user.get("name"),
+        "customer_email": payload.customer_email or user.get("email"),
         "address": payload.address,
         "status": "created",
+        "user_id": str(user.get("_id")),
     }
 
     order_id = create_document("order", order_doc)

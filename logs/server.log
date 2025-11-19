@@ -1,14 +1,12 @@
 INFO:     Will watch for changes in these directories: ['/home/workspace']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [221] using StatReload
-INFO:     Started server process [223]
+INFO:     Started reloader process [303] using StatReload
+INFO:     Started server process [305]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     172.20.0.1:52764 - "HEAD / HTTP/1.1" 405 Method Not Allowed
-INFO:     172.20.0.1:52774 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:52774 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:52776 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:52774 - "POST /seed HTTP/1.1" 500 Internal Server Error
+INFO:     172.20.0.1:36940 - "GET /shoes HTTP/1.1" 200 OK
+INFO:     172.20.0.1:36944 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:36940 - "POST /seed HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
@@ -73,7 +71,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
     result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
+  File "/home/workspace/main.py", line 173, in seed_shoes
     count = db["shoe"].count_documents({}) if db else 0
                                               ^^
   File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
@@ -81,7 +79,9 @@ Traceback (most recent call last):
     ...<3 lines>...
     )
 NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:52790 - "POST /seed HTTP/1.1" 500 Internal Server Error
+INFO:     172.20.0.1:36942 - "GET /shoes HTTP/1.1" 200 OK
+INFO:     172.20.0.1:36942 - "GET /shoes HTTP/1.1" 200 OK
+INFO:     172.20.0.1:36942 - "POST /seed HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
@@ -146,7 +146,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
     result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
+  File "/home/workspace/main.py", line 173, in seed_shoes
     count = db["shoe"].count_documents({}) if db else 0
                                               ^^
   File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
@@ -154,7 +154,7 @@ Traceback (most recent call last):
     ...<3 lines>...
     )
 NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:52776 - "POST /seed HTTP/1.1" 500 Internal Server Error
+INFO:     172.20.0.1:36956 - "POST /seed HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
@@ -219,7 +219,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
     result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
+  File "/home/workspace/main.py", line 173, in seed_shoes
     count = db["shoe"].count_documents({}) if db else 0
                                               ^^
   File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
@@ -227,8 +227,8 @@ Traceback (most recent call last):
     ...<3 lines>...
     )
 NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:52784 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:52784 - "POST /seed HTTP/1.1" 500 Internal Server Error
+INFO:     172.20.0.1:36962 - "GET /shoes HTTP/1.1" 200 OK
+INFO:     172.20.0.1:36962 - "POST /seed HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
@@ -293,7 +293,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
     result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
+  File "/home/workspace/main.py", line 173, in seed_shoes
     count = db["shoe"].count_documents({}) if db else 0
                                               ^^
   File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
@@ -301,9 +301,8 @@ Traceback (most recent call last):
     ...<3 lines>...
     )
 NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:54282 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54282 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54298 - "POST /seed HTTP/1.1" 500 Internal Server Error
+INFO:     172.20.0.1:36968 - "GET /shoes HTTP/1.1" 200 OK
+INFO:     172.20.0.1:36968 - "POST /seed HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
@@ -368,383 +367,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
     result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
-    count = db["shoe"].count_documents({}) if db else 0
-                                              ^^
-  File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
-    raise NotImplementedError(
-    ...<3 lines>...
-    )
-NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:54282 - "POST /seed HTTP/1.1" 500 Internal Server Error
-ERROR:    Exception in ASGI application
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
-    result = await app(  # type: ignore[func-returns-value]
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        self.scope, self.receive, self.send
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 84, in __call__
-    return await self.app(scope, receive, send)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/applications.py", line 1106, in __call__
-    await super().__call__(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/applications.py", line 122, in __call__
-    await self.middleware_stack(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 184, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 162, in __call__
-    await self.app(scope, receive, _send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 91, in __call__
-    await self.simple_response(scope, receive, send, request_headers=headers)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 146, in simple_response
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
-    await self.app(scope, receive, sender)
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
-    raise e
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 718, in __call__
-    await route.handle(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 66, in app
-    response = await func(request)
-               ^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 274, in app
-    raw_response = await run_endpoint_function(
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        dependant=dependant, values=values, is_coroutine=is_coroutine
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
-    return await run_in_threadpool(dependant.call, **values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
-    return await anyio.to_thread.run_sync(func, *args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/to_thread.py", line 33, in run_sync
-    return await get_asynclib().run_sync_in_worker_thread(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        func, *args, cancellable=cancellable, limiter=limiter
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 877, in run_sync_in_worker_thread
-    return await future
-           ^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
-    result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
-    count = db["shoe"].count_documents({}) if db else 0
-                                              ^^
-  File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
-    raise NotImplementedError(
-    ...<3 lines>...
-    )
-NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:52800 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:52800 - "POST /seed HTTP/1.1" 500 Internal Server Error
-ERROR:    Exception in ASGI application
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
-    result = await app(  # type: ignore[func-returns-value]
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        self.scope, self.receive, self.send
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 84, in __call__
-    return await self.app(scope, receive, send)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/applications.py", line 1106, in __call__
-    await super().__call__(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/applications.py", line 122, in __call__
-    await self.middleware_stack(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 184, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 162, in __call__
-    await self.app(scope, receive, _send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 91, in __call__
-    await self.simple_response(scope, receive, send, request_headers=headers)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 146, in simple_response
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
-    await self.app(scope, receive, sender)
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
-    raise e
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 718, in __call__
-    await route.handle(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 66, in app
-    response = await func(request)
-               ^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 274, in app
-    raw_response = await run_endpoint_function(
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        dependant=dependant, values=values, is_coroutine=is_coroutine
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
-    return await run_in_threadpool(dependant.call, **values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
-    return await anyio.to_thread.run_sync(func, *args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/to_thread.py", line 33, in run_sync
-    return await get_asynclib().run_sync_in_worker_thread(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        func, *args, cancellable=cancellable, limiter=limiter
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 877, in run_sync_in_worker_thread
-    return await future
-           ^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
-    result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
-    count = db["shoe"].count_documents({}) if db else 0
-                                              ^^
-  File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
-    raise NotImplementedError(
-    ...<3 lines>...
-    )
-NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:52804 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:52804 - "POST /seed HTTP/1.1" 500 Internal Server Error
-ERROR:    Exception in ASGI application
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
-    result = await app(  # type: ignore[func-returns-value]
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        self.scope, self.receive, self.send
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 84, in __call__
-    return await self.app(scope, receive, send)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/applications.py", line 1106, in __call__
-    await super().__call__(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/applications.py", line 122, in __call__
-    await self.middleware_stack(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 184, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 162, in __call__
-    await self.app(scope, receive, _send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 91, in __call__
-    await self.simple_response(scope, receive, send, request_headers=headers)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 146, in simple_response
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
-    await self.app(scope, receive, sender)
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
-    raise e
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 718, in __call__
-    await route.handle(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 66, in app
-    response = await func(request)
-               ^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 274, in app
-    raw_response = await run_endpoint_function(
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        dependant=dependant, values=values, is_coroutine=is_coroutine
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
-    return await run_in_threadpool(dependant.call, **values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
-    return await anyio.to_thread.run_sync(func, *args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/to_thread.py", line 33, in run_sync
-    return await get_asynclib().run_sync_in_worker_thread(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        func, *args, cancellable=cancellable, limiter=limiter
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 877, in run_sync_in_worker_thread
-    return await future
-           ^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
-    result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
-    count = db["shoe"].count_documents({}) if db else 0
-                                              ^^
-  File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
-    raise NotImplementedError(
-    ...<3 lines>...
-    )
-NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:41016 - "OPTIONS / HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41030 - "OPTIONS / HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41016 - "GET / HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41016 - "OPTIONS /test HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41030 - "GET / HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41046 - "GET /test HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41030 - "GET /test HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41030 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41030 - "POST /seed HTTP/1.1" 500 Internal Server Error
-ERROR:    Exception in ASGI application
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
-    result = await app(  # type: ignore[func-returns-value]
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        self.scope, self.receive, self.send
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 84, in __call__
-    return await self.app(scope, receive, send)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/applications.py", line 1106, in __call__
-    await super().__call__(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/applications.py", line 122, in __call__
-    await self.middleware_stack(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 184, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 162, in __call__
-    await self.app(scope, receive, _send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 91, in __call__
-    await self.simple_response(scope, receive, send, request_headers=headers)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 146, in simple_response
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
-    await self.app(scope, receive, sender)
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
-    raise e
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 718, in __call__
-    await route.handle(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 66, in app
-    response = await func(request)
-               ^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 274, in app
-    raw_response = await run_endpoint_function(
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        dependant=dependant, values=values, is_coroutine=is_coroutine
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
-    return await run_in_threadpool(dependant.call, **values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
-    return await anyio.to_thread.run_sync(func, *args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/to_thread.py", line 33, in run_sync
-    return await get_asynclib().run_sync_in_worker_thread(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        func, *args, cancellable=cancellable, limiter=limiter
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 877, in run_sync_in_worker_thread
-    return await future
-           ^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
-    result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
-    count = db["shoe"].count_documents({}) if db else 0
-                                              ^^
-  File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
-    raise NotImplementedError(
-    ...<3 lines>...
-    )
-NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:41046 - "GET /shoes HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41046 - "POST /seed HTTP/1.1" 500 Internal Server Error
-ERROR:    Exception in ASGI application
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
-    result = await app(  # type: ignore[func-returns-value]
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        self.scope, self.receive, self.send
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 84, in __call__
-    return await self.app(scope, receive, send)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/applications.py", line 1106, in __call__
-    await super().__call__(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/applications.py", line 122, in __call__
-    await self.middleware_stack(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 184, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 162, in __call__
-    await self.app(scope, receive, _send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 91, in __call__
-    await self.simple_response(scope, receive, send, request_headers=headers)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/cors.py", line 146, in simple_response
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
-    raise exc
-  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
-    await self.app(scope, receive, sender)
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
-    raise e
-  File "/usr/local/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 718, in __call__
-    await route.handle(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
-    await self.app(scope, receive, send)
-  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 66, in app
-    response = await func(request)
-               ^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 274, in app
-    raw_response = await run_endpoint_function(
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        dependant=dependant, values=values, is_coroutine=is_coroutine
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
-    return await run_in_threadpool(dependant.call, **values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
-    return await anyio.to_thread.run_sync(func, *args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/to_thread.py", line 33, in run_sync
-    return await get_asynclib().run_sync_in_worker_thread(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        func, *args, cancellable=cancellable, limiter=limiter
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 877, in run_sync_in_worker_thread
-    return await future
-           ^^^^^^^^^^^^
-  File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
-    result = context.run(func, *args)
-  File "/home/workspace/main.py", line 74, in seed_shoes
+  File "/home/workspace/main.py", line 173, in seed_shoes
     count = db["shoe"].count_documents({}) if db else 0
                                               ^^
   File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
